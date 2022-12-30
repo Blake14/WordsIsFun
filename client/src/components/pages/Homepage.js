@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import FinishBoard from './boards/FinishBoard';
 import WordBoard from './boards/WordBoard';
 
 const Homepage = (props) => {
@@ -12,6 +13,12 @@ const Homepage = (props) => {
 				tiles={tiles}
 				setTiles={setTiles}
 				setSelectedTile={setSelectedTile}
+			/>
+			<FinishBoard
+				type={'EMAIL'}
+				selectedTile={selectedTile}
+				setSelectedTile={setSelectedTile}
+				tiles={tiles}
 			/>
 		</div>
 	);
