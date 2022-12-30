@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import '../../styles/hovers.css';
 import bigLogo from '../../assets/big-logo.png';
 import Image from 'react-bootstrap/Image';
+import MenuPopUp from './MenuPopUp';
 
 const Homepage = (props) => {
 	const [selectedTile, setSelectedTile] = useState(99999);
@@ -12,6 +13,7 @@ const Homepage = (props) => {
 	const [template, setTemplate] = useState(null);
 	const [tone, setTone] = useState(null);
 	const [debug, flagDebug] = useState(0);
+	const [menuType, setMenuType] = useState('NONE');
 	const MenuButtonStyle = {
 		margin: 20,
 		color: 'white',
@@ -91,13 +93,34 @@ const Homepage = (props) => {
 							display: 'flex',
 						}}
 					>
-						<div style={MenuButtonStyle} className='hover-box-shadow-1'>
+						<div
+							style={MenuButtonStyle}
+							className='hover-box-shadow-1'
+							onClick={() => {
+								setMenuType('HOST');
+							}}
+						>
 							<p>Host Game</p>
 						</div>
-						<div style={MenuButtonStyle} className='hover-box-shadow-1'>
+						<div
+							style={MenuButtonStyle}
+							className='hover-box-shadow-1'
+							onClick={() => {
+								setMenuType('JOIN');
+							}}
+						>
 							<p>Join Game</p>
 						</div>
 					</div>
+				</div>
+				<div
+					style={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+					}}
+				>
+					<MenuPopUp menuType={menuType} setMenuType={setMenuType} />
 				</div>
 			</div>
 		);
