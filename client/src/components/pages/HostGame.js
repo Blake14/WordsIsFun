@@ -88,7 +88,7 @@ const HostGame = (props) => {
 							}}
 						>
 							<strong>Game Code: </strong>
-							{`${'JSD8FJ'}`}
+							{`${props.GenerateGameID().toUpperCase()}`}
 						</p>
 						<Button variant='success'>Launch Game</Button>
 					</div>
