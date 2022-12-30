@@ -3,6 +3,8 @@ import FinishBoard from './boards/FinishBoard';
 import WordBoard from './boards/WordBoard';
 import Button from 'react-bootstrap/Button';
 import '../../styles/hovers.css';
+import bigLogo from '../../assets/big-logo.png';
+import Image from 'react-bootstrap/Image';
 
 const Homepage = (props) => {
 	const [selectedTile, setSelectedTile] = useState(99999);
@@ -60,12 +62,28 @@ const Homepage = (props) => {
 				</Button>
 				<div
 					style={{
-						height: 800,
 						width: '100%',
 						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
 						marginTop: 50,
+					}}
+				>
+					<Image
+						src={bigLogo}
+						style={{
+							width: 1300,
+						}}
+					></Image>
+				</div>
+				<div
+					style={{
+						height: '100%',
+						width: '100%',
+						display: 'flex',
+						justifyContent: 'center',
+						alignItems: 'center',
+						marginTop: 200,
 					}}
 				>
 					<div
