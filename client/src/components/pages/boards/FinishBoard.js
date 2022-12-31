@@ -1,31 +1,51 @@
 import React, { useState } from 'react';
+import Default from '../../templates/Default';
+import Email from '../../templates/Email';
+import Letter from '../../templates/Letter';
+import Note from '../../templates/Note';
+import Sales from '../../templates/Sales';
+import Text from '../../templates/Text';
 
 const FinishBoard = (props) => {
 	const SelectTile = (id) => {};
+
 	const CreateTemplate = (charLimit, type) => {
 		let requiredChars = 5;
-		for (let i = 0; i < charLimit; i++) {
-			if (type === 'EMAIL') {
+		if (type === 'EMAIL') {
+			for (let i = 0; i < charLimit; i++) {
 				requiredChars = 15;
 				if (i <= requiredChars) {
-					if (i === 0) {
-						props.tiles.push({
-							id: i,
-							word: null,
-							reqType: 'ANY',
-							required: true,
-							special: 'TO',
-						});
-					}
-				} else if (i > 0 && i <= 5) {
 					props.tiles.push({
 						id: i,
 						word: null,
 						reqType: 'ANY',
 						required: true,
-						special: 'SUBJECT',
+						special: 'TO',
 					});
-				} else {
+					if (i === 0) {
+					} else if (i >= 0 && i <= 5) {
+						props.tiles.push({
+							id: i,
+							word: null,
+							reqType: 'ANY',
+							required: true,
+							special: 'SUBJECT',
+						});
+					} else {
+						props.tiles.push({
+							id: i,
+							word: null,
+							reqType: 'ANY',
+							required: true,
+							special: 'NONE',
+						});
+					}
+				}
+			}
+		} else {
+			for (let i = 0; i < charLimit; i++) {
+				requiredChars = 15;
+				if (i <= requiredChars) {
 					props.tiles.push({
 						id: i,
 						word: null,
@@ -33,15 +53,15 @@ const FinishBoard = (props) => {
 						required: true,
 						special: 'NONE',
 					});
+				} else {
+					props.tiles.push({
+						id: i,
+						word: null,
+						reqType: 'ANY',
+						required: false,
+						special: 'NONE',
+					});
 				}
-			} else {
-				props.tiles.push({
-					id: i,
-					word: null,
-					reqType: 'ANY',
-					required: false,
-					special: 'NONE',
-				});
 			}
 		}
 	};
@@ -68,114 +88,68 @@ const FinishBoard = (props) => {
 		color: 'white',
 		cursor: 'pointer',
 	};
-
+	if (props.tiles.length === 0) {
+		CreateTemplate(30, props.type);
+	}
 	if (props.type === 'EMAIL') {
-		if (props.tiles.length === 0) {
-			CreateTemplate(25, props.type);
-		}
 		return (
-			<div style={BoardOutline}>
-				<div
-					style={{
-						color: 'white',
-					}}
-				>
-					<div style={{ display: 'flex' }}>
-						<p>
-							<strong>To:</strong>
-							{` Mrs.`}
-						</p>
-						<p
-							style={{
-								marginLeft: 5,
-								color: 'white',
-								cursor: 'pointer',
-							}}
-							onClick={() => {
-								props.setSelectedTile(props.tiles[0].id);
-								console.log(props.selectedTile);
-							}}
-						>
-							{props.tiles[0].word || '___________'}
-						</p>
-					</div>
-					<p>
-						<strong>From: </strong> Player 1
-					</p>
-					<p style={{ display: 'flex', color: 'white', margin: 5 }}>
-						<strong>Subject: </strong>
-						{props.tiles
-							.filter((tile, index) => {
-								return tile.special === 'SUBJECT';
-							})
-							.map((tile, index) => {
-								if (props.selectedTile === tile.id) {
-									return (
-										<div
-											key={index}
-											style={{
-												margin: 5,
-												color: 'white',
-												cursor: 'pointer',
-												fontVariant: 'bold',
-											}}
-											onClick={() => {
-												props.setSelectedTile(tile.id);
-												console.log(props.selectedTile);
-											}}
-										>
-											{tile.word || '__'}
-										</div>
-									);
-								} else {
-									return (
-										<div
-											key={index}
-											style={Tile}
-											onClick={() => {
-												props.setSelectedTile(tile.id);
-												console.log(props.selectedTile);
-											}}
-										>
-											{tile.word || '___________'}
-										</div>
-									);
-								}
-							})}
-					</p>
-				</div>
-				<div style={TextBody}>
-					{props.tiles
-						.filter((tile, index) => {
-							return tile.special === 'NONE';
-						})
-						.map((tile, index) => {
-							return (
-								<div
-									key={index}
-									style={Tile}
-									onClick={() => {
-										props.setSelectedTile(tile.id);
-									}}
-								>
-									{tile.word || '___________'}
-								</div>
-							);
-						})}
-				</div>
-			</div>
+			<Email
+				BoardOutline={BoardOutline}
+				Tile={Tile}
+				TextBody={TextBody}
+				tiles={props.tiles}
+				setSelectedTile={props.setSelectedTile}
+			/>
 		);
 	} else if (props.type === 'LETTER') {
-		charLimit = 200;
-		return <div style={BoardOutline}></div>;
+		return (
+			<Letter
+				BoardOutline={BoardOutline}
+				Tile={Tile}
+				TextBody={TextBody}
+				tiles={props.tiles}
+				setSelectedTile={props.setSelectedTile}
+			/>
+		);
+	} else if (props.type === 'LNOTE') {
+		return (
+			<Note
+				BoardOutline={BoardOutline}
+				Tile={Tile}
+				TextBody={TextBody}
+				tiles={props.tiles}
+				setSelectedTile={props.setSelectedTile}
+			/>
+		);
+	} else if (props.type === 'SALES') {
+		return (
+			<Sales
+				BoardOutline={BoardOutline}
+				Tile={Tile}
+				TextBody={TextBody}
+				tiles={props.tiles}
+				setSelectedTile={props.setSelectedTile}
+			/>
+		);
+	} else if (props.type === 'TEXT') {
+		return (
+			<Text
+				BoardOutline={BoardOutline}
+				Tile={Tile}
+				TextBody={TextBody}
+				tiles={props.tiles}
+				setSelectedTile={props.setSelectedTile}
+			/>
+		);
 	} else {
 		return (
-			<div style={BoardOutline}>
-				<p style={{ color: 'white', fontSize: 30 }}>{`The "${
-					props.template.charAt(0).toUpperCase() +
-					props.template.slice(1).toLowerCase()
-				}" Template Does Not Exist`}</p>
-			</div>
+			<Default
+				BoardOutline={BoardOutline}
+				Tile={Tile}
+				TextBody={TextBody}
+				tiles={props.tiles}
+				setSelectedTile={props.setSelectedTile}
+			/>
 		);
 	}
 };

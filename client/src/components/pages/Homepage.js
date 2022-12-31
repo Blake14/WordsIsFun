@@ -229,6 +229,15 @@ const Homepage = (props) => {
 						>
 							<p>Join Game</p>
 						</div>
+						<div
+							style={MenuButtonStyle}
+							className='hover-box-shadow-1'
+							onClick={() => {
+								setMenuType('JOIN');
+							}}
+						>
+							<p>How to Play</p>
+						</div>
 					</div>
 				</div>
 				<div

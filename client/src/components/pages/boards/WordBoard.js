@@ -36,7 +36,7 @@ const WordBoard = (props) => {
 			if (
 				WordData.filter((word) => {
 					return word.word === randWord;
-				}).length < maxPerCard
+				}).length <= maxPerCard
 			) {
 				boardData.push({
 					word: randWord.charAt(0).toUpperCase() + randWord.slice(1),
