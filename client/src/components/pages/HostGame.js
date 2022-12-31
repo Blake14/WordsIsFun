@@ -164,7 +164,21 @@ const HostGame = (props) => {
 							</strong>
 							{gameId || 'XXXXX'}
 						</p>
-						<Button variant='success'>Launch Game</Button>
+						<Button
+							variant='success'
+							onClick={() => {
+								let tempRand = Math.floor(
+									Math.random() * (props.templates.length - 1 - 0 + 1) + 0
+								);
+								let toneRand = Math.floor(
+									Math.random() * (props.tones.length - 1 - 0 + 1) + 0
+								);
+								props.setTemplate(props.templates[tempRand].code);
+								props.setTone(props.tones[toneRand].code);
+							}}
+						>
+							Launch Game
+						</Button>
 					</div>
 				</div>
 			</div>

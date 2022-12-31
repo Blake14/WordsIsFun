@@ -102,9 +102,10 @@ const WordBoard = (props) => {
 						color: 'white',
 					}}
 				>
-					<strong>Current Template: </strong>
+					<strong>Current Tone: </strong>
 					{`${
-						'EMAIL'.charAt(0).toUpperCase() + 'EMAIL'.slice(1).toLowerCase()
+						props.tone.charAt(0).toUpperCase() +
+						props.tone.slice(1).toLowerCase()
 					}`}
 				</p>
 				<p
@@ -114,8 +115,11 @@ const WordBoard = (props) => {
 						color: 'white',
 					}}
 				>
-					<strong>Current Tone: </strong>
-					{`${'SAD'.charAt(0).toUpperCase() + 'SAD'.slice(1).toLowerCase()}`}
+					<strong>Current Template: </strong>
+					{`${
+						props.template.charAt(0).toUpperCase() +
+						props.template.slice(1).toLowerCase()
+					}`}
 				</p>
 			</div>
 			<div
