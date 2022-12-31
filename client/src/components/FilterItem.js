@@ -1,3 +1,5 @@
+import { MdOutlineRadioButtonChecked } from 'react-icons/md';
+
 const FilterItem = (props) => {
 	return (
 		<div
@@ -19,8 +21,22 @@ const FilterItem = (props) => {
 						props.filterSelects === props.code ? '#DF4698' : 'white',
 					height: 20,
 					width: 20,
+					border: '2px solid white',
 				}}
-			></div>
+			>
+				{props.filterSelects === props.code ? (
+					<MdOutlineRadioButtonChecked
+						style={{
+							position: 'relative',
+							top: -7,
+							left: -2,
+							fontSize: 20,
+						}}
+					/>
+				) : (
+					''
+				)}
+			</div>
 			<p>{props.title}</p>
 		</div>
 	);
