@@ -170,8 +170,11 @@ const FinishBoard = (props) => {
 		return <div style={BoardOutline}></div>;
 	} else {
 		return (
-			<div>
-				<p>Loading...</p>
+			<div style={BoardOutline}>
+				<p style={{ color: 'white', fontSize: 30 }}>{`The "${
+					props.template.charAt(0).toUpperCase() +
+					props.template.slice(1).toLowerCase()
+				}" Template Does Not Exist`}</p>
 			</div>
 		);
 	}
