@@ -14,7 +14,108 @@ const Homepage = (props) => {
 	const [tone, setTone] = useState(null);
 	const [debug, flagDebug] = useState(0);
 	const [menuType, setMenuType] = useState('NONE');
-
+	const [tones, setTones] = useState([
+		{
+			id: 1,
+			code: 'HAPPY',
+			title: 'Happy',
+			def: '',
+			active: true,
+		},
+		{
+			id: 2,
+			code: 'SAD',
+			title: 'Sad',
+			def: '',
+			active: true,
+		},
+		{
+			id: 3,
+			code: 'SCARED',
+			title: 'Scared',
+			def: '',
+			active: true,
+		},
+		{
+			id: 4,
+			code: 'EXCITED',
+			title: 'Excited',
+			def: '',
+			active: true,
+		},
+		{
+			id: 5,
+			code: 'ANGER',
+			title: 'Angry',
+			def: '',
+			active: true,
+		},
+		{
+			id: 6,
+			code: 'NERVE',
+			title: 'Nervous',
+			def: '',
+			active: true,
+		},
+		{
+			id: 7,
+			code: 'OBNOX',
+			title: 'Obnoxious',
+			def: '',
+			active: true,
+		},
+		{
+			id: 8,
+			code: 'KIND',
+			title: 'Kind',
+			def: '',
+			active: true,
+		},
+	]);
+	const [templates, setTemplates] = useState([
+		{
+			id: 1,
+			code: 'EMAIL',
+			title: 'Work Email',
+			active: true,
+		},
+		{
+			id: 2,
+			code: 'LETTER',
+			title: 'Letter',
+			active: true,
+		},
+		{
+			id: 3,
+			code: 'LNOTE',
+			title: 'Love Note',
+			active: true,
+		},
+		{
+			id: 4,
+			code: 'POEM',
+			title: 'Poem',
+			active: true,
+		},
+		{
+			id: 5,
+			code: 'SLOGAN',
+			title: 'Company Slogan',
+			active: true,
+		},
+		{
+			id: 6,
+			code: 'SALES',
+			title: 'Sales Pitch',
+			active: true,
+		},
+		{
+			id: 7,
+			code: 'TEXT',
+			title: 'Text Message',
+			active: true,
+		},
+	]);
 	const MenuButtonStyle = {
 		margin: 20,
 		color: 'white',
@@ -37,12 +138,16 @@ const Homepage = (props) => {
 					tiles={tiles}
 					setTiles={setTiles}
 					setSelectedTile={setSelectedTile}
+					tone={tone}
+					template={template}
 				/>
 				<FinishBoard
 					type={template}
 					selectedTile={selectedTile}
 					setSelectedTile={setSelectedTile}
 					tiles={tiles}
+					tone={tone}
+					template={template}
 				/>
 			</div>
 		);
@@ -124,6 +229,14 @@ const Homepage = (props) => {
 						menuType={menuType}
 						setMenuType={setMenuType}
 						players={props.players}
+						templates={templates}
+						tones={tones}
+						setTemplates={setTemplates}
+						setTones={setTones}
+						template={template}
+						tone={tone}
+						setTemplate={setTemplate}
+						setTone={setTone}
 					/>
 				</div>
 			</div>
