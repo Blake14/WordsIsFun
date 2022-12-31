@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import WordTile from './WordTile';
-import Image from 'react-bootstrap/Image';
-import logo from '../../../assets/logo.png';
+import MenuBar from '../../MenuBar';
+import FilterBar from '../../FilterBar';
 
 const WordBoard = (props) => {
 	const UnlimSelections = [
@@ -27,6 +26,7 @@ const WordBoard = (props) => {
 			hexCode: '',
 		},
 	];
+	const [filterSelects, setFilterSelects] = useState('NONE');
 	const WordFilter = (WordData) => {
 		while (boardData.length < boardLimit) {
 			let rand = Math.floor(Math.random() * (WordData.length - 1 - 0 + 1) + 0);
@@ -57,71 +57,15 @@ const WordBoard = (props) => {
 				height: 750,
 			}}
 		>
-			<div
-				style={{
-					display: 'flex',
-					margin: 20,
-				}}
-			>
-				<Image
-					src={logo}
-					style={{
-						width: 200,
-					}}
-				></Image>
-				<div>
-					<Button
-						variant='success'
-						size='sm'
-						onClick={() => {
-							setBoardData([]);
-							WordFilter(props.WordData);
-						}}
-					>
-						Refresh Deck
-					</Button>
-				</div>
-				<p
-					style={{
-						margin: '5px 5px 5px 15px',
-						fontSize: 18,
-						color: 'white',
-					}}
-				>
-					<strong>Remaining Words: </strong>
-					{`${
-						boardData.filter((w, i) => {
-							return w.active === true;
-						}).length
-					}`}
-				</p>
-				<p
-					style={{
-						margin: '5px 5px 5px 15px',
-						fontSize: 18,
-						color: 'white',
-					}}
-				>
-					<strong>Current Tone: </strong>
-					{`${
-						props.tone.charAt(0).toUpperCase() +
-						props.tone.slice(1).toLowerCase()
-					}`}
-				</p>
-				<p
-					style={{
-						margin: '5px 5px 5px 15px',
-						fontSize: 18,
-						color: 'white',
-					}}
-				>
-					<strong>Current Template: </strong>
-					{`${
-						props.template.charAt(0).toUpperCase() +
-						props.template.slice(1).toLowerCase()
-					}`}
-				</p>
-			</div>
+			<MenuBar
+				template={props.template}
+				tone={props.tone}
+				WordFilter={WordFilter}
+				setBoardData={setBoardData}
+				boardData={boardData}
+				tones={props.tones}
+				templates={props.templates}
+			/>
 			<div
 				style={{
 					display: 'flex',
@@ -130,6 +74,10 @@ const WordBoard = (props) => {
 					ItemAlign: 'center',
 				}}
 			>
+				<FilterBar
+					filterSelects={filterSelects}
+					setFilterSelects={setFilterSelects}
+				/>
 				{[...Array(boardLimit + UnlimSelections.length)].map((x, index) => {
 					if (index < boardLimit) {
 						return (
@@ -146,6 +94,7 @@ const WordBoard = (props) => {
 								setTiles={props.setTiles}
 								setSelectedTile={props.setSelectedTile}
 								boardData={boardData}
+								filterSelects={filterSelects}
 							/>
 						);
 					} else {
@@ -163,6 +112,7 @@ const WordBoard = (props) => {
 								setTiles={props.setTiles}
 								setSelectedTile={props.setSelectedTile}
 								boardData={boardData}
+								filterSelects={filterSelects}
 							/>
 						);
 					}
