@@ -14,6 +14,7 @@ const Homepage = (props) => {
 	const [tone, setTone] = useState(null);
 	const [debug, flagDebug] = useState(0);
 	const [menuType, setMenuType] = useState('NONE');
+
 	const MenuButtonStyle = {
 		margin: 20,
 		color: 'white',
@@ -26,8 +27,6 @@ const Homepage = (props) => {
 	if (debug === 1 && template === null && tone === null) {
 		setTemplate('EMAIL');
 		setTone('HAPPY');
-		console.log(template);
-		console.log(tone);
 	}
 	if (template !== null && tone !== null) {
 		return (
@@ -120,7 +119,12 @@ const Homepage = (props) => {
 						alignItems: 'center',
 					}}
 				>
-					<MenuPopUp menuType={menuType} setMenuType={setMenuType} />
+					<MenuPopUp
+						gameData={props.gameData}
+						menuType={menuType}
+						setMenuType={setMenuType}
+						players={props.players}
+					/>
 				</div>
 			</div>
 		);
