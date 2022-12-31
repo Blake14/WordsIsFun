@@ -132,23 +132,37 @@ const Homepage = (props) => {
 	if (template !== null && tone !== null) {
 		return (
 			<div>
-				<WordBoard
-					WordData={props.WordData}
-					selectedTile={selectedTile}
-					tiles={tiles}
-					setTiles={setTiles}
-					setSelectedTile={setSelectedTile}
-					tone={tone}
-					template={template}
-				/>
-				<FinishBoard
-					type={template}
-					selectedTile={selectedTile}
-					setSelectedTile={setSelectedTile}
-					tiles={tiles}
-					tone={tone}
-					template={template}
-				/>
+				<div
+					style={{
+						height: 800,
+					}}
+				>
+					<WordBoard
+						WordData={props.WordData}
+						selectedTile={selectedTile}
+						tiles={tiles}
+						setTiles={setTiles}
+						setSelectedTile={setSelectedTile}
+						tone={tone}
+						template={template}
+						tones={tones}
+						templates={templates}
+					/>
+				</div>
+				<div
+					style={{
+						marginTop: 15,
+					}}
+				>
+					<FinishBoard
+						type={template}
+						selectedTile={selectedTile}
+						setSelectedTile={setSelectedTile}
+						tiles={tiles}
+						tone={tone}
+						template={template}
+					/>
+				</div>
 			</div>
 		);
 	} else {

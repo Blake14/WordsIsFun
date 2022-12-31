@@ -1,0 +1,29 @@
+const FilterItem = (props) => {
+	return (
+		<div
+			style={{
+				display: 'flex',
+			}}
+			onClick={() => {
+				if (props.filterSelects === props.code) {
+					props.setFilterSelects('NONE');
+				} else {
+					props.setFilterSelects(props.code);
+				}
+			}}
+		>
+			<div
+				style={{
+					margin: '3px 10px 0px 10px',
+					backgroundColor:
+						props.filterSelects === props.code ? '#DF4698' : 'white',
+					height: 20,
+					width: 20,
+				}}
+			></div>
+			<p>{props.title}</p>
+		</div>
+	);
+};
+
+export default FilterItem;

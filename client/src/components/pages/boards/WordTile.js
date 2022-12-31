@@ -33,69 +33,139 @@ const WordTile = (props) => {
 			</p>
 		</Tooltip>
 	);
-	return (
-		<div
-			key={props.index}
-			style={{
-				height: 40,
-				minWidth: 100,
-				boxShadow: '0px 2px 8px 0px black',
-				borderRadius: 25,
-				margin: 5,
-				display: 'flex',
-				justifyContent: 'center',
-				ItemAlign: 'center',
-				backgroundColor: props.active ? props.hexCode : '#93a8ac',
-			}}
-		>
-			<OverlayTrigger
-				placement='right'
-				delay={{ show: 250, hide: 400 }}
-				overlay={renderTooltip(props.word, props.type, props.uses)}
+	let checkSelect = 'N';
+
+	if (props.filterSelects === props.type) {
+		return (
+			<div
+				key={props.index}
+				style={{
+					height: 40,
+					minWidth: 100,
+					boxShadow: '0px 2px 8px 0px black',
+					borderRadius: 25,
+					margin: 5,
+					display: 'flex',
+					justifyContent: 'center',
+					ItemAlign: 'center',
+					backgroundColor: props.active ? '#DF4698' : '#93a8ac',
+				}}
 			>
+				<OverlayTrigger
+					placement='right'
+					delay={{ show: 250, hide: 400 }}
+					overlay={renderTooltip(props.word, props.type, props.uses)}
+				>
+					<p
+						style={{
+							padding: 5,
+							cursor: 'pointer',
+							color: props.active ? 'white' : 'black',
+						}}
+					>
+						<BsInfoCircle />
+					</p>
+				</OverlayTrigger>
+				<p
+					style={{
+						padding: 5,
+						cursor: 'pointer',
+						color: props.active ? 'white' : 'black',
+					}}
+					onClick={() => {
+						if (props.selectedTile !== 99999) {
+							let tempArray = [];
+							tempArray = props.tiles;
+							tempArray
+								.filter((tile, index) => {
+									return tile.id === props.selectedTile;
+								})
+								.map((tile, index) => {
+									tile.word = props.word;
+									props.setTiles(tempArray);
+									props.setSelectedTile(99999);
+									return <></>;
+								});
+							props.boardData
+								.filter((a, i) => {
+									return i === props.index;
+								})
+								.map((a, i) => {
+									a.active = false;
+									return <></>;
+								});
+						}
+					}}
+				>
+					{props.word}
+				</p>
+			</div>
+		);
+	} else {
+		return (
+			<div
+				key={props.index}
+				style={{
+					height: 40,
+					minWidth: 100,
+					boxShadow: '0px 2px 8px 0px black',
+					borderRadius: 25,
+					margin: 5,
+					display: 'flex',
+					justifyContent: 'center',
+					ItemAlign: 'center',
+					backgroundColor: props.active ? props.hexCode : '#93a8ac',
+				}}
+			>
+				<OverlayTrigger
+					placement='right'
+					delay={{ show: 250, hide: 400 }}
+					overlay={renderTooltip(props.word, props.type, props.uses)}
+				>
+					<p
+						style={{
+							padding: 5,
+							cursor: 'pointer',
+						}}
+					>
+						<BsInfoCircle />
+					</p>
+				</OverlayTrigger>
 				<p
 					style={{
 						padding: 5,
 						cursor: 'pointer',
 					}}
+					onClick={() => {
+						if (props.selectedTile !== 99999) {
+							let tempArray = [];
+							tempArray = props.tiles;
+							tempArray
+								.filter((tile, index) => {
+									return tile.id === props.selectedTile;
+								})
+								.map((tile, index) => {
+									tile.word = props.word;
+									props.setTiles(tempArray);
+									props.setSelectedTile(99999);
+									return <></>;
+								});
+							props.boardData
+								.filter((a, i) => {
+									return i === props.index;
+								})
+								.map((a, i) => {
+									a.active = false;
+									return <></>;
+								});
+						}
+					}}
 				>
-					<BsInfoCircle />
+					{props.word}
 				</p>
-			</OverlayTrigger>
-			<p
-				style={{
-					padding: 5,
-					cursor: 'pointer',
-				}}
-				onClick={() => {
-					if (props.selectedTile !== 99999) {
-						let tempArray = [];
-						tempArray = props.tiles;
-						tempArray
-							.filter((tile, index) => {
-								return tile.id === props.selectedTile;
-							})
-							.map((tile, index) => {
-								tile.word = props.word;
-								props.setTiles(tempArray);
-								props.setSelectedTile(99999);
-								return <></>;
-							});
-						props.boardData
-							.filter((a, i) => {
-								return i === props.index;
-							})
-							.map((a, i) => {
-								a.active = false;
-								return <></>;
-							});
-					}
-				}}
-			>
-				{props.word}
-			</p>
-		</div>
-	);
+			</div>
+		);
+	}
 };
 
 export default WordTile;
