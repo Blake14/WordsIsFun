@@ -137,6 +137,47 @@ const Homepage = (props) => {
 						height: 800,
 					}}
 				>
+					<div
+						style={{
+							position: 'relative',
+							top: 100,
+							float: 'right',
+							marginRight: 100,
+							border: '2px solid white',
+							padding: 20,
+							borderRadius: 25,
+							backgroundColor: '#14213d',
+						}}
+					>
+						<p
+							style={{
+								color: 'white',
+								color: '#f28482',
+							}}
+						>
+							<strong>Admin Control Panel</strong>
+						</p>
+						<div
+							style={{
+								color: 'white',
+								fontSize: 20,
+								display: 'flex',
+							}}
+						>
+							<Button variant='success' style={{ marginRight: 20 }}>
+								Ready Up
+							</Button>
+							<Button variant='danger' style={{ marginRight: 20 }}>
+								Force Round End
+							</Button>
+							<Button variant='info' style={{ marginRight: 20 }}>
+								Player List
+							</Button>
+							<Button variant='danger' style={{ marginRight: 20 }}>
+								End Game
+							</Button>
+						</div>
+					</div>
 					<WordBoard
 						WordData={props.WordData}
 						selectedTile={selectedTile}
